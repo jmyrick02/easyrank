@@ -1,0 +1,12 @@
+C:\Code\C#\Blazor\EasyRank\EasyRank\Shared\bin\Release\net5.0\EasyRank.Shared.deps.json
+C:\Code\C#\Blazor\EasyRank\EasyRank\Shared\bin\Release\net5.0\EasyRank.Shared.dll
+C:\Code\C#\Blazor\EasyRank\EasyRank\Shared\bin\Release\net5.0\ref\EasyRank.Shared.dll
+C:\Code\C#\Blazor\EasyRank\EasyRank\Shared\bin\Release\net5.0\EasyRank.Shared.pdb
+C:\Code\C#\Blazor\EasyRank\EasyRank\Shared\obj\Release\net5.0\EasyRank.Shared.csprojAssemblyReference.cache
+C:\Code\C#\Blazor\EasyRank\EasyRank\Shared\obj\Release\net5.0\EasyRank.Shared.GeneratedMSBuildEditorConfig.editorconfig
+C:\Code\C#\Blazor\EasyRank\EasyRank\Shared\obj\Release\net5.0\EasyRank.Shared.AssemblyInfoInputs.cache
+C:\Code\C#\Blazor\EasyRank\EasyRank\Shared\obj\Release\net5.0\EasyRank.Shared.AssemblyInfo.cs
+C:\Code\C#\Blazor\EasyRank\EasyRank\Shared\obj\Release\net5.0\EasyRank.Shared.csproj.CoreCompileInputs.cache
+C:\Code\C#\Blazor\EasyRank\EasyRank\Shared\obj\Release\net5.0\EasyRank.Shared.dll
+C:\Code\C#\Blazor\EasyRank\EasyRank\Shared\obj\Release\net5.0\ref\EasyRank.Shared.dll
+C:\Code\C#\Blazor\EasyRank\EasyRank\Shared\obj\Release\net5.0\EasyRank.Shared.pdb
