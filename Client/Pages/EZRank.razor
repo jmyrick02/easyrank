@@ -1,0 +1,106 @@
+﻿@page "/easyrank"
+
+<h1>Easy Rank</h1>
+
+@if (challengers == null)
+{
+    <strong>Enter the list with each element on a separate line.</strong>
+    <textarea id="list" name="list" rows="10" cols="200" @bind="list"></textarea>
+    <p>Press the button below when the list is complete.</p>
+    <button @onclick="Start">Begin!</button>
+}
+else if (!finished)
+{
+    <button @onclick="() => Award(challengers.Item1, challengers.Item2)">@challengers.Item1</button>
+    <strong> VERSUS </strong>
+    <button @onclick="() => Award(challengers.Item2, challengers.Item1)">@challengers.Item2</button>
+
+    <p>Number of Rankings: <strong>@numRankings</strong></p>
+    <p>The more rankings done, the more accurate the results, especially for large lists. You should aim for at least <strong>@(3 * competitors.Length)</strong> rankings before finishing.</p>
+    <button @onclick="() => finished = true">Finish!</button>
+}
+else
+{
+    <ol>
+        @foreach (var competitor in points)
+        {
+            <li value=@places[competitor.Key]>@competitor.Key (@competitor.Value points)</li>
+        }
+    </ol>
+}
+
+@code {
+    private Random rand = new Random();
+
+    private string list = "";
+    private string[] competitors;
+    private Tuple<string, string> challengers;
+    private Dictionary<string, int> points = new Dictionary<string, int>();
+    private Dictionary<string, int> matches = new Dictionary<string, int>();
+    private Dictionary<string, int> places = new Dictionary<string, int>();
+    private int numRankings = 0;
+    private bool finished = false;
+
+    public void Start()
+    {
+        competitors = list.Trim('\n').Split('\n');
+        foreach (var competitor in competitors)
+        {
+            points.Add(competitor, 0);
+            matches.Add(competitor, 0);
+        }
+
+        RankCompetitors();
+        ChooseChallengers();
+    }
+
+    public void RankCompetitors()
+    {
+        var pointsSorted = points.OrderByDescending(e => e.Value);
+        points = new();
+        var matchesSorted = matches.OrderBy(e => e.Value);
+        matches = new();
+
+        foreach (var pair in pointsSorted)
+        {
+            points.Add(pair.Key, pair.Value);
+        }
+        foreach (var pair in matchesSorted)
+        {
+            matches.Add(pair.Key, pair.Value);
+        }
+
+        places = new();
+        int i = 0;
+        KeyValuePair<string, int> previousPair = new("\n", 0);
+        foreach (var pair in points)
+        {
+            if (i == 0 || points[pair.Key] != points[previousPair.Key])
+            {
+                i++;
+            }
+            places.Add(pair.Key, i);
+
+            previousPair = pair;
+        }
+    }
+
+    public void ChooseChallengers()
+    {
+        challengers = Tuple.Create(matches.ElementAt(0).Key, matches.ElementAt(rand.Next(1, matches.Count)).Key);
+        matches[challengers.Item1]++;
+        matches[challengers.Item2]++;
+    }
+
+    public void Award(string winner, string loser)
+    {
+        numRankings++;
+
+        int award = 1 + Math.Max(0, places[winner] - places[loser]);
+        points[winner] += award;
+        points[loser] -= Math.Max(0, places[winner] - places[loser]);
+
+        RankCompetitors();
+        ChooseChallengers();
+    }
+}
